@@ -1,0 +1,3 @@
+
+
+pygameLatestVersion = False
