@@ -2,9 +2,14 @@
 import osuGlobals
 import importlib
 import glob
+from datetime import datetime
+
+import logging
 
 # for resolution purposes
 from win32api import GetSystemMetrics
+
+import osuMainGame
 
 class _entryPoint:
 
@@ -15,6 +20,8 @@ class _entryPoint:
 
         osuGlobals.osuPixelMult = osuGlobals.systemResolution[1] / osuGlobals.OSURES[1]
         print(osuGlobals.osuPixelMult)
+
+        logging.info("Osupixel multiplier successfully calculated!")
 
     def checkPygame(self):
         if not importlib.util.find_spec('pygame'):
@@ -31,35 +38,45 @@ class _entryPoint:
         return True
 
         del pygame
+        logging.info("Pygame succesfully validated!")
 
 
+    # load all of the user configs
     def loadUserConfig(self):
 
-        print("Loading user config")
 
         for f in glob.glob("*.cfg"):
             with open(f,encoding="utf-8") as file:
                 for line in file:
-                    k = line.split("=")
-                    lineDict = {k[1].strip(' \t\n\r'):k[0].strip(' \t\n\r')}
-                    if line.startswith("key"):
-                        
-                        osuGlobals.osuKeyMap.update(lineDict)
-                    else:
-                        osuGlobals.osuSettings.update(lineDict)
+                    try:
+                        k = line.split("=")
+                        if line.startswith("key"):
+                            lineDict = {k[1].strip(' \t\n\r'):k[0].strip(' \t\n\r')}
+                            osuGlobals.osuKeyMap.update(lineDict)
+                        else:
+                            lineDict = {k[0].strip(' \t\n\r'):k[1].strip(' \t\n\r')}
+                            osuGlobals.osuSettings.update(lineDict)
+                    except IndexError:
+                        logging.warning(f"The line {line} caused some trouble while loading settings!")
+
+        logging.info("File Successfully found and loaded")
 
                     
-
-
-        print(osuGlobals.osuKeyMap)
 
         
 
     def __init__(self):
 
+        dateTime = datetime.now()
+        dt_string = dateTime.strftime("%d%m%Y%H%M%S")
+
+        logging.basicConfig(filename=f'logs\\{dt_string}.log', level=logging.DEBUG)
+
         osuGlobals.pygameLatestVersion = self.checkPygame()
         self.getOsuPixelMult()
         self.loadUserConfig()
+
+        osuMainGame.startMain(self)
 
 
         
