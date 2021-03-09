@@ -2,7 +2,20 @@
 import osuGlobals
 import importlib
 
+# for resolution purposes
+from win32api import GetSystemMetrics
+
 class _entryPoint:
+
+    # This will be the number that all coordinates are multiplied by
+    def getOsuPixelMult(self):
+
+        osuGlobals.systemResolution = (GetSystemMetrics(0),GetSystemMetrics(1))
+
+        osuGlobals.osuPixelMult = osuGlobals.systemResolution[1] / osuGlobals.OSURES[1]
+        print(osuGlobals.osuPixelMult)
+
+        
 
 
     def checkPygame(self):
@@ -26,7 +39,10 @@ class _entryPoint:
     def __init__(self):
 
         osuGlobals.pygameLatestVersion = self.checkPygame()
+        self.getOsuPixelMult()
 
+
+main = _entryPoint()
 
     
 
