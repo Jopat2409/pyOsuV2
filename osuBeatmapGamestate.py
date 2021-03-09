@@ -1,5 +1,6 @@
 import glob
 import logging
+import os
 
 import osuGlobals
 
@@ -19,14 +20,21 @@ class GAMESTATE_BeatmapSelection:
 
         for beatmapFolder in glob.glob(f'{osuGlobals.osuSettings["BeatmapDirectory"]}\\*'):
             logging.info(f'checking {beatmapFolder} for beatmaps!')
-            for beatmap in glob.glob(f'{beatmapFolder}\\*.osu'):
 
-                print(beatmap)
+            beatmapName = os.path.basename(beatmapFolder)
+            bm = {beatmapName:[]}
+            for beatmap in glob.glob(f'{beatmapFolder}\\*.osu'):
+                bm[beatmapName].append(os.path.basename(beatmap))
+                self.beatmaps.update(bm)
+
+        print(self.beatmaps)
 
     def __init__(self, gamestateHandler):
 
         logging.info("Initialized beatmap selection screen!")
         self.handler = gamestateHandler
+
+        self.beatmaps = {}
         self.loadBeatmaps()
 
 
