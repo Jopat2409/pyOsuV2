@@ -3,6 +3,7 @@ import logging
 import os
 
 import osuGlobals
+import osuBeatmap
 
 #this gamestate is for when the user is browsing beatmaps
 # neccessary info that will need to be loaded prior is:
@@ -22,10 +23,7 @@ class GAMESTATE_BeatmapSelection:
             logging.info(f'checking {beatmapFolder} for beatmaps!')
 
             beatmapName = os.path.basename(beatmapFolder)
-            bm = {beatmapName:[]}
-            for beatmap in glob.glob(f'{beatmapFolder}\\*.osu'):
-                bm[beatmapName].append(os.path.basename(beatmap))
-                self.beatmaps.update(bm)
+            self.beatmaps.update({beatmapName:osuBeatmap.BmCollection(beatmapFolder)})
 
         print(self.beatmaps)
 
