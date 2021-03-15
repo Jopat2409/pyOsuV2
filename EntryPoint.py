@@ -70,7 +70,7 @@ class _entryPoint:
         dateTime = datetime.now()
         dt_string = dateTime.strftime("%d%m%Y%H%M%S")
 
-        logging.basicConfig(filename=f'logs\\{dt_string}.log', level=logging.DEBUG)
+        logging.basicConfig(stream=open(f'logs\\{dt_string}.log', 'w', encoding='utf-8'),level=logging.DEBUG)
 
         osuGlobals.pygameLatestVersion = self.checkPygame()
         self.getOsuPixelMult()
