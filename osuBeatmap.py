@@ -42,11 +42,12 @@ class BaseBeatmap:
             keys = self.data.keys()
             counter = 0
             for line in beatmap:
-                parse = line.split(":").strip(' \n')
+                parse = line.split(":")
                 try:
-                    self.data[line[0]] = self.data[line[1]]
+                    if str(parse[0]) in keys:
+                        self.data[str(parse[0])] = parse[1].strip(' \n')
                 except KeyError:
-                    logging.warning(f"{parse} is bad")
+                    logging.warning(f"{parse[0]} is bad")
                     pass
                 except IndexError:
                     logging.warning(f"{parse} is causing an index error to occur, this should not be anything to worry about")
