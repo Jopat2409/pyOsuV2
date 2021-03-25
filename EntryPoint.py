@@ -17,9 +17,12 @@ class _entryPoint:
     # This will be the number that all coordinates are multiplied by
     def getOsuPixelMult(self):
 
+        # gets the user resolution in order to resize correctly
+        # will need to be changed to accomodate for other users
         user32 = ctypes.windll.user32
         osuGlobals.systemResolution = (user32.GetSystemMetrics(0),user32.GetSystemMetrics(1))
 
+        
         osuGlobals.osuPixelMult = osuGlobals.systemResolution[1] / osuGlobals.OSURES[1]
         print(osuGlobals.osuPixelMult)
 
@@ -69,8 +72,9 @@ class _entryPoint:
 
     def __init__(self):
 
+        # get the current date to create the log file
         dateTime = datetime.now()
-        dt_string = dateTime.strftime("%d%m%Y%H%M%S")
+        dt_string = dateTime.strftime("%d-%m-%Y-%H-%M-%S")
 
         if not os.path.isdir('logs'):
             os.mkdir('logs')
