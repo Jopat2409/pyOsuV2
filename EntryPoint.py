@@ -1,14 +1,15 @@
 
-import osuGlobals
+
 import importlib
 import glob
+import os
 from datetime import datetime
 
 import logging
-
 # for resolution purposes
-from win32api import GetSystemMetrics
+import ctypes
 
+import osuGlobals
 import osuMainGame
 
 class _entryPoint:
@@ -16,7 +17,8 @@ class _entryPoint:
     # This will be the number that all coordinates are multiplied by
     def getOsuPixelMult(self):
 
-        osuGlobals.systemResolution = (GetSystemMetrics(0),GetSystemMetrics(1))
+        user32 = ctypes.windll.user32
+        osuGlobals.systemResolution = (user32.GetSystemMetrics(0),user32.GetSystemMetrics(1))
 
         osuGlobals.osuPixelMult = osuGlobals.systemResolution[1] / osuGlobals.OSURES[1]
         print(osuGlobals.osuPixelMult)
@@ -69,6 +71,9 @@ class _entryPoint:
 
         dateTime = datetime.now()
         dt_string = dateTime.strftime("%d%m%Y%H%M%S")
+
+        if not os.path.isdir('logs'):
+            os.mkdir('logs')
 
         logging.basicConfig(stream=open(f'logs\\{dt_string}.log', 'w', encoding='utf-8'),level=logging.DEBUG)
 
