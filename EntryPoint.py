@@ -75,14 +75,11 @@ class _entryPoint:
         # get the current date to create the log file
         dateTime = datetime.now()
         dt_string = dateTime.strftime("%Y-%m-%d-%H-%M-%S")
-
         # create the log directory if it does not already exist
         if not os.path.isdir('logs'):
             os.mkdir('logs')
-
         # set up the logger for logging support
         logging.basicConfig(stream=open(f'logs\\{dt_string}.log', 'w', encoding='utf-8'),level=logging.DEBUG)
-
         # check the pygame version
         osuGlobals.pygameLatestVersion = self.checkPygame()
         # get the multiplier
