@@ -1,7 +1,11 @@
 import logging
 import sys
+import pygame
 
 import osuBeatmapGamestate
+import osuGlobals
+
+import math
 
 
 
@@ -14,15 +18,14 @@ class GAMESTATE_MainMenu:
         self.gamestateManager = gamestateManager
         
         self.inputMap = {1:self.play,3:sys.exit}
+        self.eventMap = {}
         logging.info("Initialized main menu gamestate")
 
 
     def update(self):
 
         # temporary text menu to get the program up and running
-        
-        choice = int(input("What would you like to do? \n 1) Play \n 2) Create \n 3) Quit\n >>> "))
-        self.inputMap[choice]()
+        pass
 
         
     def play(self):
@@ -31,9 +34,13 @@ class GAMESTATE_MainMenu:
 
 
 
-    def draw(self, graphics):
+    def draw(self):
 
-        pass
+        tempCanvas = pygame.Surface((math.ceil(int(osuGlobals.osuSettings["Height"]) / 2),math.ceil(int(osuGlobals.osuSettings["Height"]) / 2)))
+        tempCanvas.fill((255,255,255))
+
+        return tempCanvas
+        
 
     def clear(self):
 
