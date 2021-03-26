@@ -1,6 +1,6 @@
 import logging
-
-
+import pygame
+import sys
 
 
 class GameStateManager:
@@ -25,7 +25,29 @@ class GameStateManager:
 
     def draw(self, graphics):
 
-        self.c_gamestate.draw(graphics)
+        # draws the returned canvas onto the main screen adn then updates the screen
+        graphics.blit(self.c_gamestate.draw(), (0,0))
+        pygame.display.update()
+        
+    def eventMap(self, event, eventMap):
+        try:
+            eventMap[event]()
+        except KeyError:
+            pass
+        
+
+        
+    def handleEvents(self, eventList):
+
+        print("Handling Events")
+
+        for event in eventList:
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
+            else:
+                self.eventMap(event.type, self.c_gamestate.eventMap)
+        
     
     # this method should be used where none of the data relating to the previous gamestate will be needed again soon
     def swapGamestate(self, newGamestate):

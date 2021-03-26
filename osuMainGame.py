@@ -1,9 +1,13 @@
 
 
 import logging
+import pygame
+
 
 import osuGamestateManager
 import osuMainMenu
+import osuGlobals
+
 
 class MainGame:
 
@@ -15,18 +19,27 @@ class MainGame:
         del entryPoint
         logging.info("Successfully cleared all memory relating to the entry point")
 
+        if not pygame.get_init():
+            pygame.init()
 
+        # initialize the gamestate of the game
         self.gamestateManager = osuGamestateManager.GameStateManager()
         self.gamestateManager.initializeGamestate(osuMainMenu.GAMESTATE_MainMenu(self.gamestateManager))
 
+        self.mainCanvas = pygame.display.set_mode((int(osuGlobals.osuSettings["Width"]),
+                                                   int(osuGlobals.osuSettings["Height"])))
+            
         self.runMainLoop()
 
 
     def runMainLoop(self):
 
         while(True):
+            self.gamestateManager.handleEvents(pygame.event.get())
+            
             self.gamestateManager.update()
-            self.gamestateManager.draw("Graphics")
+            # draw the scene (passes the main drawing canvas)
+            self.gamestateManager.draw(self.mainCanvas)
         
     
 
