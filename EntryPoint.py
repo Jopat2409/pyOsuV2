@@ -72,6 +72,9 @@ class _entryPoint:
 
     def __init__(self):
 
+        # ensures that the window will not be scaled with windows scaling mode
+        ctypes.windll.user32.SetProcessDPIAware()
+
         # get the current date to create the log file
         dateTime = datetime.now()
         dt_string = dateTime.strftime("%Y-%m-%d-%H-%M-%S")
