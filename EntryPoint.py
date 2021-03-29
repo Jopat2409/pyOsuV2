@@ -90,6 +90,9 @@ class _entryPoint:
         # load the user's config
         self.loadUserConfig()
 
+        osuGlobals.osuSettings["Width"] = int(osuGlobals.osuSettings["Width"])
+        osuGlobals.osuSettings["Height"] = int(osuGlobals.osuSettings["Height"])
+
         # start the main loop
         osuMainGame.startMain(self)
 
