@@ -1,6 +1,7 @@
 import logging
 import sys
 import pygame
+import pygame.gfxdraw
 
 import osuBeatmapGamestate
 import osuGlobals
@@ -37,7 +38,7 @@ class GAMESTATE_MainMenu:
     def draw(self):
 
         tempCanvas = pygame.Surface((math.ceil(int(osuGlobals.osuSettings["Height"]) / 2),math.ceil(int(osuGlobals.osuSettings["Height"]) / 2)))
-        tempCanvas.fill((255,255,255))
+        pygame.gfxdraw.filled_circle(tempCanvas,0,0,math.ceil(int(osuGlobals.osuSettings["Height"]) / 4), (100,100,100))
 
         return tempCanvas
         

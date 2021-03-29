@@ -2,6 +2,7 @@ import logging
 import pygame
 import sys
 
+import pygamePosLib
 
 class GameStateManager:
 
@@ -26,7 +27,8 @@ class GameStateManager:
     def draw(self, graphics):
 
         # draws the returned canvas onto the main screen adn then updates the screen
-        graphics.blit(self.c_gamestate.draw(), (0,0))
+        pygamePosLib.blitCenter(self.c_gamestate.draw(), graphics)
+        #graphics.blit(self.c_gamestate.draw(), (0,0))
         pygame.display.update()
         
     def eventMap(self, event, eventMap):
