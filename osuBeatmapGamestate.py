@@ -1,6 +1,8 @@
 import glob
 import logging
 import os
+import pygame
+import random
 
 import osuGlobals
 import osuBeatmap
@@ -25,24 +27,34 @@ class GAMESTATE_BeatmapSelection:
             beatmapName = os.path.basename(beatmapFolder)
             self.beatmaps.update({beatmapName:osuBeatmap.BmCollection(beatmapFolder)})
 
-        print(self.beatmaps)
+        #print(self.beatmaps)
 
     def __init__(self, gamestateHandler):
 
         logging.info("Initialized beatmap selection screen!")
         self.handler = gamestateHandler
 
+        self.tempCanvas = pygame.Surface((int(osuGlobals.osuSettings["Width"]),int(osuGlobals.osuSettings["Height"])), pygame.SRCALPHA)
+
         self.beatmaps = {}
         self.loadBeatmaps()
 
+        self.backgroundIMG = pygame.image.load("assets/background.jpg")
+        self.backgroundIMG = pygame.transform.scale(self.backgroundIMG, (osuGlobals.osuSettings["Width"], osuGlobals.osuSettings["Height"]))
+
+        self.cBeatmap = random.choice(list(self.beatmaps.values()))
+        print(self.cBeatmap)
 
 
-    def update(self):
+
+    def update(self, events):
         pass
 
 
-    def draw(self, graphics):
+    def draw(self):
 
-        pass
+        self.tempCanvas.blit(self.backgroundIMG, (0,0))
+
+        return self.tempCanvas
 
         

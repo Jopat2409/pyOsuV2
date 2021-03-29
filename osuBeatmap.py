@@ -53,7 +53,7 @@ class BaseBeatmap:
                     logging.warning(f"{parse} is causing an index error to occur, this should not be anything to worry about")
                     pass
 
-        print(self.data)
+        #print(self.data)
 
             # the only
             
