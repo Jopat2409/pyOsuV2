@@ -14,6 +14,7 @@ class GameStateManager:
 
         self.pausedGamestates = []
         self.c_gamestate = None
+        self.c_gameEvents = []
 
     def initializeGamestate(self, initialGamestate):
 
@@ -21,7 +22,7 @@ class GameStateManager:
 
     def update(self):
 
-        self.c_gamestate.update()
+        self.c_gamestate.update(self.c_gameEvents)
 
 
     def draw(self, graphics):
@@ -41,14 +42,18 @@ class GameStateManager:
         
     def handleEvents(self, eventList):
 
-        print("Handling Events")
+        self.c_gameEvents = []
+
+        #print("Handling Events")
 
         for event in eventList:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
-            else:
-                self.eventMap(event.type, self.c_gamestate.eventMap)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                self.c_gameEvents.append("mb1")
+
+
         
     
     # this method should be used where none of the data relating to the previous gamestate will be needed again soon
