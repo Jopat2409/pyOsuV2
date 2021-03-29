@@ -28,6 +28,8 @@ class MainGame:
 
         self.mainCanvas = pygame.display.set_mode((int(osuGlobals.osuSettings["Width"]),
                                                    int(osuGlobals.osuSettings["Height"])))
+
+        
             
         self.runMainLoop()
 
