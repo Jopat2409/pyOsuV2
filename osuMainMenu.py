@@ -65,8 +65,8 @@ class GAMESTATE_MainMenu:
         self.tempCanvas.blit(self.backgroundIMG, (0,0))
         
         if self.hover:
-            pygame.gfxdraw.filled_circle(self.tempCanvas,self.tempX, self.tempY, self.cHeight+20, (200,200,200))
-        pygame.gfxdraw.filled_circle(self.tempCanvas,self.tempX, self.tempY, self.cHeight+15, (255,255,255))
+            pygame.gfxdraw.filled_circle(self.tempCanvas,self.tempX, self.tempY, self.cHeight+50, (200,200,200))
+        pygame.gfxdraw.filled_circle(self.tempCanvas,self.tempX, self.tempY, self.cHeight+45, (255,255,255))
         pygame.gfxdraw.filled_circle(self.tempCanvas,self.tempX, self.tempY, self.cHeight, (255,102,170))
 
         pygamePosLib.blitCenter(self.osuText, self.tempCanvas)
