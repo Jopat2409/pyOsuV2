@@ -1,6 +1,7 @@
 import os
 import glob
 import logging
+import random
 
 
 # a beatmap collection, a collection of difficulties
@@ -9,10 +10,21 @@ class BmCollection:
     def __init__(self, path):
 
         self.name = os.path.basename(path)
-        diffs = []
+        self.diffs = []
         for beatmap in glob.glob(f'{path}\\*.osu'):
 
-            diffs.append(BaseBeatmap(beatmap))
+            self.diffs.append(BaseBeatmap(beatmap))
+
+        self.cDiff = random.randint(0,len(self.diffs)-1)
+
+    def getCurrentDiff(self):
+
+        return self.diffs[self.cDiff]
+
+
+    def __len__(self):
+
+        return len(self.diffs)
 
 
 # a specific beatmap within a collection - IE a specific difficulty
@@ -27,6 +39,7 @@ class BaseBeatmap:
                      "TitleUnicode":"",
                      "ArtistUnicode":"",
                      "Creator":"",
+                     "Version":"",
                      "HPDrainRate":0.0,
                      "CircleSize":0.0,
                      "OverallDifficulty":0.0,
