@@ -52,6 +52,11 @@ class GameStateManager:
                 sys.exit(0)
             elif event.type == pygame.MOUSEBUTTONUP:
                 self.c_gameEvents.append("mb1")
+            elif event.type == pygame.KEYUP:
+                try:
+                    self.c_gamestate.eventMap[event.key]()
+                except KeyError:
+                    pass
 
 
         
