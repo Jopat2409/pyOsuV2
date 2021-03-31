@@ -21,6 +21,7 @@ class GAMESTATE_MainMenu:
         self.gamestateManager = gamestateManager
 
         self.largeFont = pygame.font.SysFont('Comic Sans MS', 200)
+        self.largeFont.bold = True
         self.osuText = self.largeFont.render("OSU!", True, (255,255,255))
         
         self.inputMap = {1:self.play,3:sys.exit}
