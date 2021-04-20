@@ -30,7 +30,7 @@ class GameStateManager:
         # draws the returned canvas onto the main screen adn then updates the screen
         pygamePosLib.blitCenter(self.c_gamestate.draw(), graphics)
         #graphics.blit(self.c_gamestate.draw(), (0,0))
-        pygame.display.update()
+        
         
     def eventMap(self, event, eventMap):
         try:

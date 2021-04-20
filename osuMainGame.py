@@ -26,8 +26,8 @@ class MainGame:
         self.gamestateManager = osuGamestateManager.GameStateManager()
         self.gamestateManager.initializeGamestate(osuMainMenu.GAMESTATE_MainMenu(self.gamestateManager))
 
-        self.mainCanvas = pygame.display.set_mode((int(osuGlobals.osuSettings["Width"]),
-                                                   int(osuGlobals.osuSettings["Height"])))
+        self.mainCanvas = pygame.display.set_mode(osuGlobals.systemResolution)
+        
 
         
             
@@ -41,7 +41,11 @@ class MainGame:
             
             self.gamestateManager.update()
             # draw the scene (passes the main drawing canvas)
-            self.gamestateManager.draw(self.mainCanvas)
+            tempCanvas = pygame.Surface((osuGlobals.osuSettings["Width"],osuGlobals.osuSettings["Height"]))
+            self.gamestateManager.draw(tempCanvas)
+            tempCanvas = pygame.transform.scale(tempCanvas, (osuGlobals.systemResolution))
+            self.mainCanvas.blit(tempCanvas, (0,0))
+            pygame.display.update()
         
     
 
