@@ -17,6 +17,7 @@ class BmCollection:
 
         self.cDiff = random.randint(0,len(self.diffs)-1)
 
+
     def getCurrentDiff(self):
 
         return self.diffs[self.cDiff]
@@ -25,6 +26,9 @@ class BmCollection:
     def __len__(self):
 
         return len(self.diffs)
+
+
+
 
 
 # a specific beatmap within a collection - IE a specific difficulty
