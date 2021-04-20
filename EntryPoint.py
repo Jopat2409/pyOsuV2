@@ -20,7 +20,7 @@ class _entryPoint:
         # gets the user resolution in order to resize correctly
         # will need to be changed to accomodate for other users
         user32 = ctypes.windll.user32
-        osuGlobals.systemResolution = (user32.GetSystemMetrics(0),user32.GetSystemMetrics(1))
+        osuGlobals.systemResolution = (int(user32.GetSystemMetrics(0)),int(user32.GetSystemMetrics(1)))
 
         
         osuGlobals.osuPixelMult = osuGlobals.systemResolution[1] / osuGlobals.OSURES[1]
